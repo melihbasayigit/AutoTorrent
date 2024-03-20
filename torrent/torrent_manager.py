@@ -40,7 +40,8 @@ class TorrentManager:
 
         # Extract the cookie for subsequent requests
         self.cookie = response.cookies.get('SID')
-    def __add_torrent(self, magnet_link, category_type: CategoryType):
+
+    def __add_torrent(self, magnet_link, category_type: CategoryType = None):
         if not self.cookie:
             self.__login_to_qbittorrent()  # Session check if necessary re-login process
 
@@ -49,8 +50,11 @@ class TorrentManager:
         add_torrent_data = {'urls': magnet_link,
                             'upLimit': self.gl_upload_limit,
                             'dlLimit': self.gl_download_limit,
-                            'seedingTimeLimit': self.gl_seeding_time_limit,
-                            'savepath': category_type.value}
+                            'seedingTimeLimit': self.gl_seeding_time_limit}
+
+        if category_type is not None:
+            add_torrent_data['savepath'] = category_type.value
+
         headers = {'Cookie': f'SID={self.cookie}'}
         requests.post(add_torrent_url, data=add_torrent_data, headers=headers)
 
@@ -74,6 +78,6 @@ class TorrentManager:
         last_torrent = self.get_torrents(1)
         return last_torrent[0]['name']
     
-    def insert_torrent(self, magnet_link, category_type: CategoryType) -> str:
+    def insert_torrent(self, magnet_link, category_type: CategoryType = None) -> str:
         self.__add_torrent(magnet_link=magnet_link, category_type=category_type)
         return self.get_last_torrent()
