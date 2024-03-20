@@ -63,7 +63,7 @@ QB_WEB_UI=http://127.0.0.1:9000
 
 #### EnvError: Please provide QB_USERNAME, QB_PASSWORD, and QB_WEB_UI in the .env file.
 
-You need to check your .env file is correct. There is an example [.env]("#usage") file
+You need to check your .env file is correct. There is an example [.env](#usage) file
 
 #### Where is my downloaded files.
 
