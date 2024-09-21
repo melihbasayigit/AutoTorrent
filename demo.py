@@ -1,3 +1,6 @@
+import sys
+sys.path.append("AutoTorrent")
+
 from auto_torrent import AutoTorrent
 
 auto_torrent = AutoTorrent()
