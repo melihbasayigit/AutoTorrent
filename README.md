@@ -73,8 +73,22 @@ I will fix savepath soon. You find all paths in category_type.py
 
 Install dotenv
 
+DotEnv:
+
 ```bash
 pip install python-dotenv
+```
+
+BeautifulSoup4:
+
+```bash
+pip install bs4
+```
+
+Requests:
+
+```bash
+pip install requests
 ```
 
 ## Related
