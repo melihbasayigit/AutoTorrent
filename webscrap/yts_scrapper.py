@@ -27,8 +27,24 @@ class YTSScrapper():
         for torrent in torrents:
             size = torrent.find('div', class_='modal-quality').text.strip()
             quality = torrent.find_all('p', class_='quality-size')[0].text.strip()
+            file_size = torrent.find_all('p', class_='quality-size')[1].text.strip()
             magnet_link = torrent.find('a', class_='magnet-download')['href']
-            torrent_item = SingleYTSTorrent(item.title, item.year, item.url, magnet_link, quality, size)
+            cover_picture = None
+            poster_div = soup.find('div', {'id': 'movie-poster'})
+            img_tag = poster_div.find('img') if poster_div else None
+            if img_tag:
+                cover_picture = img_tag.get('src')
+                print(cover_picture)
+            else:
+                print("Image not found")
+            movie_category = None
+            h2_tags = soup.find_all('h2')
+            if h2_tags:
+                movie_category = h2_tags[1].get_text(strip=True)
+                print("First Category:", movie_category)
+            else:
+                print("Not enough h2 tags found")
+            torrent_item = SingleYTSTorrent(item.title, item.year, item.url, magnet_link, quality, size, file_size, cover_picture, movie_category)
             if self.__use_filters(torrent_item, allowed_qualities):
                 results.append(torrent_item)
         return results
