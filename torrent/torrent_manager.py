@@ -20,6 +20,7 @@ class TorrentManager:
         self.gl_download_limit = 9500 * 1024  # Unit in bytes/second
         self.gl_upload_limit = 150 * 1024  # Unit in bytes/second
         self.gl_seeding_time_limit = 10080  # Unit minute. 10080 minutes is equal to 1 week.
+        self.gl_download_path = '/media/melih/Huge/melih-share/Plex'
 
         # Login to qBittorrent
         self.cookie = None
@@ -53,10 +54,12 @@ class TorrentManager:
                             'seedingTimeLimit': self.gl_seeding_time_limit}
 
         if category_type is not None:
-            add_torrent_data['savepath'] = category_type.value
+            add_torrent_data['savepath'] = f'{self.gl_download_path}{category_type.value}'
 
         headers = {'Cookie': f'SID={self.cookie}'}
         requests.post(add_torrent_url, data=add_torrent_data, headers=headers)
+
+    # Public methods
 
     def change_gl_download_limit(self, KiB: int):
         self.gl_download_limit = KiB * 1024

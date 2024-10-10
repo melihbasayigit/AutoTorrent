@@ -55,6 +55,14 @@ QB_PASSWORD=123456
 QB_WEB_UI=http://127.0.0.1:9000
 ```
 
+Category Types:
+```python
+class CategoryType(Enum):
+    ANIME = '/media/melih/Huge/melih-share/Plex/Anime'
+    MOVIE = '/media/melih/Huge/melih-share/Plex/Movies'
+    TV_SERIES = '/media/melih/Huge/melih-share/Plex/TVSeries'
+```
+
 ## Documentation
 
 [Documentation](#) Coming Soon
